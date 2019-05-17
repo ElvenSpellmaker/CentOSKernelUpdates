@@ -1,6 +1,8 @@
 CentOS Kernel Upgrades
 ======================
 
+[![Build Status](https://travis-ci.org/ElvenSpellmaker/CentOSKernelUpdates.svg?branch=master)](https://travis-ci.org/ElvenSpellmaker/CentOSKernelUpdates)
+
 This script updates kernel packages on a list of CentOS machines and gives them
 a reboot after a successful upgrade.
 
