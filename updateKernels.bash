@@ -6,12 +6,12 @@ if [ -z "$1" ]; then
 fi
 
 case $2 in
-  ODD|EVEN)
-  ;;
-  *)
-    >&2 echo "Please supply a valid type to upgrade, 'ODD' or 'EVEN'!"
-    exit 1
-  ;;
+	ODD|EVEN)
+	;;
+	*)
+		>&2 echo "Please supply a valid type to upgrade, 'ODD' or 'EVEN'!"
+		exit 1
+	;;
 esac
 
 ENVIRONMENT="$1"
