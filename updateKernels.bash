@@ -45,12 +45,12 @@ if [[ ! $MACHINES ]]; then
 fi
 
 while read -r machine; do
-	echo "sshing to '$machine'..." | tee -a $FILE
+	echo "sshing to '$machine'..." | tee -a "$FILE"
 	# This is so a user KnownHosts file doesn't interfere with the main script
 	ssh-keyscan -H "$machine" > "$TEMP_KNOWN_HOST_FILE" 2> /dev/null
 
 	# This is the actual line that does the update...
-	ssh -qoUserKnownHostsFile="$TEMP_KNOWN_HOST_FILE" -oConnectTimeout=5 -oBatchMode=yes "$machine" 'bash -s' < ./updateSingleKernel.bash 2>&1 | tee -a $FILE
+	ssh -qoUserKnownHostsFile="$TEMP_KNOWN_HOST_FILE" -oConnectTimeout=5 -oBatchMode=yes "$machine" 'bash -s' < ./updateSingleKernel.bash 2>&1 | tee -a "$FILE"
 
 	# Bash only...
 	# For zsh use ${pipestatus[0]}
@@ -69,6 +69,6 @@ while read -r machine; do
 	elif [ "$SSH_CODE" -ne 0 ]; then
 		echo -e "\e[31mAn error occured when trying to perform the kernel update on '$machine'!\e[0m" | tee -a "$FAIL_FILE"
 	fi
-done <<< "$(grep "[01]${!GREP_TYPE}.\+\.[cd]om$" <<< $MACHINES)"
+done <<< "$(grep "[01]${!GREP_TYPE}.\+\.[cd]om$" <<< "$MACHINES")"
 
 rm -f -- "$TEMP_KNOWN_HOST_FILE"
