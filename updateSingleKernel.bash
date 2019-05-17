@@ -20,9 +20,9 @@ if [ "$FREE_MEMORY" -lt 512 ]; then
 	# fallocate -l 512M /swapfile &> /dev/null # Causes problems
 	dd if=/dev/zero of=/swapfile count=512 bs=1MiB &> /dev/null
 	chmod 600 /swapfile &> /dev/null
-	mkswap /swapfile &> /dev/null
 
-	if [ $? -ne 0 ]; then
+
+	if ! mkswap /swapfile &> /dev/null; then
 		>&2 echo "The machine '$FULL_HOSTNAME' couldn't allocate a swapfile, exiting! (trying to allocate because it has low RAM)"
 		exit 1
 	fi
